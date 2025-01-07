@@ -1,0 +1,18 @@
+/* 
+이 코드는 공통 응답 메시지 구조를 정의합니다.
+응답 메시지는 핸들러 ID, 응답 코드, 타임스탬프 및 선택적 데이터를 포함하여 서버와 클라이언트 간의 통신을 관리합니다.
+응답 코드로 성공 또는 실패를 나타내며, 시퀀스 값을 통해 요청과 응답을 매칭할 수 있습니다.
+*/
+
+syntax = "proto3";  // Protobuf 버전 설정
+
+package response;  // 패키지 이름
+
+// 공통 응답 메시지 구조
+message Response {
+  uint32 handlerId = 1;      // 핸들러 ID
+  uint32 responseCode = 2;   // 응답 코드 (성공: 0, 실패: 에러 코드)
+  int64 timestamp = 3;       // 메시지 생성 타임스탬프 (Unix 타임스탬프)
+  bytes data = 4;            // 실제 응답 데이터 (선택적 필드)
+  uint32 sequence = 5;       // 시퀀스 값
+}

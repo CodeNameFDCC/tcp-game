@@ -1,0 +1,23 @@
+/* 
+이 코드는 공통 패킷 구조와 Ping 메시지를 정의합니다.
+핸들러 ID, 사용자 ID, 클라이언트 버전, 호출 수 및 실제 데이터를 포함한 패킷 구조를 제공합니다.
+Ping 메시지는 서버와 클라이언트 간의 연결 상태를 확인하기 위해 사용됩니다.
+*/
+
+syntax = "proto3";  // Protobuf 버전 설정
+
+package common;  // 패키지 이름
+
+// 공통 패킷 구조
+message Packet {
+  uint32 handlerId = 1;      // 핸들러 ID (4바이트)
+  string userId = 2;         // 유저 ID (UUID, 16바이트)
+  string clientVersion = 3;  // 클라이언트 버전 (문자열)
+  uint32 sequence = 4;       // 유저의 호출 수 (42억)
+  bytes payload = 5;         // 실제 데이터
+}
+
+// Ping 메시지
+message Ping {
+  int64 timestamp = 1;       // Ping 타임스탬프
+}
