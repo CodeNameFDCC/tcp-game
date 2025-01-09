@@ -1,3 +1,8 @@
+// src/classes/models/game.class.js
+
+
+
+
 /* 
 이 클래스는 게임 세션을 관리하며, 최대 플레이어 수를 설정하고 
 사용자를 추가하거나 제거하며 게임 상태를 추적합니다.
@@ -77,14 +82,17 @@ class Game {
   }
 
   // 모든 사용자 위치 계산 메서드
-  getAllLocation() {
+  getAllLocation(excludeUserId) {
     const maxLatency = this.getMaxLatency();  // 최대 지연 시간 가져오기
 
     // 각 사용자의 위치 계산
-    const locationData = this.users.map((user) => {
-      const { x, y } = user.calculatePosition(maxLatency);  // 위치 계산
-      return { id: user.id, x, y };  // 사용자 ID와 위치 반환
-    });
+    const locationData = this.users
+      .filter((user) => user.id !== excludeUserId) // 자신을 제외한 모든 유저를 받아야함
+      .map((user) => {
+
+        const { x, y } = user.calculatePosition(maxLatency);  // 위치 계산
+        return { id: user.id, x, y };  // 사용자 ID와 위치 반환
+      });
     return createLocationPacket(locationData);  // 위치 데이터 패킷 생성
   }
 }

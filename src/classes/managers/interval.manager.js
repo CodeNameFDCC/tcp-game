@@ -1,3 +1,7 @@
+// src/classes/managers/interval.manager.js
+
+
+
 /* IntervalManager 클래스는 BaseManager를 상속받아 
 플레이어와 관련된 인터벌을 관리하는 기능을 제공합니다. 
 addPlayer, removePlayer, clearAll 등의 메서드를 통해 

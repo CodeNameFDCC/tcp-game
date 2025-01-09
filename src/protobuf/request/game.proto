@@ -1,3 +1,6 @@
+// src/protobuf/request/game.proto
+
+
 /* 
 이 코드는 게임 생성, 참가, 위치 정보 업데이트를 위한 메시지 구조를 정의합니다.
 각 메시지는 관련된 필드를 포함하여 게임의 상태와 사용자 위치 정보를 효과적으로 전달합니다.
@@ -21,7 +24,6 @@ message JoinGamePayload {
 
 // 위치 정보 업데이트 payload
 message LocationUpdatePayload {
-  string gameId = 1;         // 게임 ID (UUID)
-  float x = 2;               // X 좌표
-  float y = 3;               // Y 좌표
+    required float x = 1;
+    required float y = 2;
 }

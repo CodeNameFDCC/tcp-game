@@ -1,3 +1,7 @@
+// src/classes/models/user.class.js
+
+
+
 /* 
 User 클래스는 각 사용자에 대한 정보를 관리하며, 
 위치 업데이트, 핑/퐁 응답 처리 및 위치 추정 기능을 제공합니다.
@@ -17,16 +21,33 @@ class User {
     this.lastUpdateTime = Date.now();  // 마지막 업데이트 시간 초기화
   }
 
+  // sequence 속성의 getter와 setter 추가
+  set sequence(value) {
+    this._sequence = value;
+  }
+
+  get sequence() {
+    return this._sequence;
+  }
+
+
   // 사용자 위치 업데이트 메서드
   updatePosition(x, y) {
     this.x = x;  // x 좌표 업데이트
     this.y = y;  // y 좌표 업데이트
     this.lastUpdateTime = Date.now();  // 마지막 업데이트 시간 갱신
+    console.log(`Updated position for user ${this.id}: x=${x}, y=${y}`);
   }
 
   // 다음 패킷 순서 가져오기
   getNextSequence() {
     return ++this.sequence;  // 순서 증가 후 반환
+  }
+
+  sendUpdate(packet) {
+    if (this.socket && this.socket.writable) {
+      this.socket.write(packet);
+    }
   }
 
   // 핑 메서드

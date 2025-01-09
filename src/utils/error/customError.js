@@ -1,3 +1,6 @@
+// src/utills/error/customError.js
+
+
 /* 
 이 코드는 사용자 정의 오류 클래스를 정의합니다.
 'CustomError' 클래스는 기본 Error 클래스를 확장하여 오류 코드와 메시지를 포함합니다.

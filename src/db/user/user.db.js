@@ -1,3 +1,7 @@
+// src/db/user/user.db.js
+
+
+
 /* 
 이 코드는 사용자 정보를 데이터베이스에서 관리하기 위한 함수들을 정의합니다.
 'findUserByDeviceID'는 장치 ID로 사용자를 검색하고, 'createUser'는 새 사용자를 생성하며,

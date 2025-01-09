@@ -1,3 +1,5 @@
+// src/session/game.session.js
+
 /* 
 이 코드는 게임 세션을 관리하는 기능을 제공합니다.
 세션 추가, 제거, 특정 세션 조회 및 모든 세션 조회 기능을 포함합니다.
@@ -6,6 +8,15 @@
 
 import { gameSessions } from './sessions.js';  // 게임 세션 목록
 import Game from '../classes/models/game.class.js';  // Game 클래스 임포트
+import { v4 as uuidv4 } from 'uuid';
+
+export const createGameSession = () => {
+  const gameId = uuidv4();  // 게임 ID 생성
+  const session = new Game(gameId);
+  gameSessions.push(session);
+  console.log(`Game session created with ID: ${gameId}`);
+  return session;
+};
 
 // 게임 세션 추가 함수
 export const addGameSession = (id) => {

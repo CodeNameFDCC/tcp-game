@@ -1,3 +1,5 @@
+// src/protobuf/request/initial.proto
+
 /* 
 이 코드는 최초 패킷 구조를 정의합니다.
 초기화 과정에서 장치 ID를 포함하는 메시지를 사용하여 클라이언트와 서버 간의 연결을 설정합니다.
@@ -8,7 +10,11 @@ syntax = "proto3";  // Protobuf 버전 설정
 
 package initial;  // 패키지 이름
 
+
+
 // 최초 패킷 구조
-message InitialPacket {
-  string deviceId = 1;  // 장치 ID
+message InitialPacket  {
+    string deviceId = 1;  // 클라이언트에서 보내는 deviceId
+    uint32 playerId = 2;  // 클라이언트에서 보내는 playerId
+    float latency = 3;    // 클라이언트의 latency
 }

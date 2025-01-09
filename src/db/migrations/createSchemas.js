@@ -1,3 +1,6 @@
+// src/db/migrations/createSchemas.js
+
+
 /* 
 이 코드는 SQL 파일을 읽어 데이터베이스에 쿼리를 실행하여 
 스키마를 생성하는 기능을 제공합니다. 

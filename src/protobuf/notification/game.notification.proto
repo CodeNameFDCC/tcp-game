@@ -1,3 +1,6 @@
+// src/protobuf/notification/game.notification.proto
+
+
 /* 
 이 코드는 게임 관련 알림 메시지 구조를 정의합니다.
 위치 정보 메시지와 게임 시작 알림 메시지를 포함하며,

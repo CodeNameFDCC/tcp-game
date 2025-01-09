@@ -1,3 +1,6 @@
+// src/db/user/user.queries.js
+
+
 /* 
 이 코드는 사용자 관련 SQL 쿼리문들을 상수로 정의합니다.
 'FIND_USER_BY_DEVICE_ID'는 장치 ID로 사용자를 조회하고,

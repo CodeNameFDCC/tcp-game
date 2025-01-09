@@ -1,3 +1,7 @@
+// src/classes/managers/base.manager.js
+
+
+
 /* BaseManager 클래스는 플레이어 관리 기능을 위한 추상 클래스입니다. 
 이 클래스는 직접 인스턴스를 생성할 수 없으며, 
 addPlayer, removePlayer, clearAll 메서드를 반드시 구현해야 합니다. 
