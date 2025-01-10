@@ -1,5 +1,4 @@
-// src/utills/notification/game.notification.js
-
+// src/utils/notification/game.notification.js
 
 /* 
 이 코드는 다양한 유형의 패킷을 생성하는 기능을 제공합니다.
@@ -28,15 +27,43 @@ const makeNotification = (message, type) => {
   return Buffer.concat([packetLength, packetType, message]);
 };
 
-// 위치 업데이트 패킷 생성 함수
-export const createLocationPacket = (users) => {
-  const protoMessages = getProtoMessages();
-  const Location = protoMessages.gameNotification.LocationUpdate;
+export const createLocationPacket = (userLocation) => {
+  try {
+    // Proto 메시지 가져오기
+    const protoMessages = getProtoMessages();
+    const LocationUpdate = protoMessages.gameNotification.LocationUpdate;
 
-  const payload = { users };
-  const message = Location.create(payload);  // 프로토 메시지 생성
-  const locationPacket = Location.encode(message).finish();  // 메시지 인코딩
-  return makeNotification(locationPacket, PACKET_TYPE.LOCATION);  // 알림 패킷 생성
+    if (!LocationUpdate) {
+      console.error('LocationUpdate not found in gameNotification');
+      console.log('Available types:', Object.keys(protoMessages.gameNotification || {}));
+      throw new Error('LocationUpdate proto message not found');
+    }
+
+    // 페이로드 생성
+    const payload = {
+      users: [{  // 배열로 변경 (repeated field)
+        id: userLocation.user.id,
+        x: userLocation.user.x,
+        y: userLocation.user.y,
+        status: userLocation.user.status,
+        playerId: userLocation.user.playerId  // playerId 추가
+      }]
+    };
+
+    console.log('Creating location packet with data:', payload);
+
+    // 프로토 메시지 생성 및 인코딩
+    const message = LocationUpdate.create(payload);
+    const locationPacket = LocationUpdate.encode(message).finish();
+
+    // makeNotification 함수를 사용하여 최종 패킷 생성
+    return makeNotification(locationPacket, PACKET_TYPE.LOCATION);
+  } catch (error) {
+    console.error('Error creating location packet:', error);
+    console.error('Payload:', userLocation);
+    console.error('Stack trace:', error.stack);
+    throw error;
+  }
 };
 
 // 게임 시작 알림 패킷 생성 함수
